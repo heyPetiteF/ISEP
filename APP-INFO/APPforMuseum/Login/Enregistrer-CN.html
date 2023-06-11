@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>注册</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="login-box">
+
+        <!--LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL-->
+        <div class="login-left">
+            <img src="LOGO-museum.png" alt="LOGO-museum" width="250" height="300" ;>
+            <script src="script.js"></script>
+
+        </div>
+
+        <!--RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR-->
+        <div class="login-right">
+
+          <h2>注册新用户</h2>
+
+          <form action="#" method="post">
+            <input type="text" placeholder="用户名" name="username" required>
+            <input type="password" placeholder="密码" name="password" required>
+            <input type="code" placeholder="用户码" name="code" required>
+            <button type="créer">注册</button>
+            <p>已经拥有账户？<a href="./Login-CN.html"> 登录</a></p>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 200vh;
+        background-color: #f5f5f5;
+      }
+
+      .login-box {
+        display: flex;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        width: 800px;
+        height: 700px;
+      }
+
+      /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL*/
+      .login-left {
+        margin: auto;
+      	margin-left: 1%;
+      	padding: 10px;
+      	background-color: white;
+      	border-radius: 5px;
+      }
+
+      img{
+        width: 250px;
+        height: 300px;
+      }
+
+
+   
+      /*RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR*/
+      .login-right {
+        margin: auto;
+      	margin-right: 2%;
+      	padding: 50px;
+      	max-width: 400px;
+      	background-color: white;
+      	border-radius: 5px;
+      	box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      }
+
+      .login-right h2 {
+        margin-top: 0;
+        font-size: 2em;
+        text-align: center;
+      }
+
+      .login-right input[type="text"],
+      .login-right input[type="password"], 
+      .login-right input[type="code"]{
+        padding: 10px;
+        margin-bottom: 20px;
+        border: none;
+        border-bottom: 3px solid #7f8c8d;
+        width: 95%;
+        font-size: 1.5em;
+        text-align: center;
+      }
+
+      .login-right button {
+        background-color: #34495e;
+        color: white;
+        padding: 5px 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-top: 10px;
+        font-size: 1.4em;
+      }
+
+      .login-right button:hover {
+        background-color: #34495e;
+      }
+
+      .login-right p {
+        margin-top: 30px;
+        font-size: 1.2em;
+      }
+
+      .login-right a {
+        color: #7f8c8d;
+        text-decoration: underline;
+      }
+
+      .login-right a:hover {
+        color: #34495e;
+      }
+    </style>
+
+
+    <script>
+      function validate() {
+        var code = document.getElementById("code").value;
+        var randomCode = Math.floor(Math.random() * 9000) + 1000;
+  
+        if (code == randomCode) {
+          document.getElementById("result").innerHTML = "Login successful!";
+        } else {
+          document.getElementById("result").innerHTML = "Invalid code, please try again.";
+        }
+      }
+    </script>
+
+  </body>
+
+</html>
+
+
+

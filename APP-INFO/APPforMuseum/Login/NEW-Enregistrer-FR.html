@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Enregistrer</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+
+    <button onclick="openPopup()">Click for open</button>
+
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <title>Enregistrer</title>
+        <!--LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL-->
+        <div class="login-left">
+            <div style="width: 200px; height: 250px; margin: auto;">
+            <img src="LOGO-museum.png" alt="LOGO-museum">
+            </div>
+            <script src="script.js"></script>
+        </div>
+
+        <!--RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR-->
+        <div class="login-right">
+
+          <h2>Enregistrer</h2>
+
+          <!--L'attribut "action" est défini sur l'URL de la page cible.-->
+          <form action="./Site-captoeuvre.html" method="post" id="myForm">
+            <input type="email" placeholder="E-mail" name="email" required>
+            <input type="text" placeholder="Nom d'utilisateur" name="username" required>
+            <input type="password" placeholder="Mot de passe" name="password" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Le mot de passe doit contenir au moins 8 caractères, dont au moins une lettre, un chiffre et un caractère spécial. (@$!%*#?&)。" required>
+            <input type="password" placeholder="Confirmer le mot de passe" id="confirmPassword" name="confirmPassword" required>
+            <p id="passwordMatchError" style="color: red; display: none;">Mots de passe ne correspondent pas.</p>
+            <input type="code" placeholder="Code de client" name="code" required>
+            <p id="requiredFieldError" style="color: red; display: none;">Veuillez remplir tous les champs obligatoires.</p>
+            <button type="button" onclick="validateForm()">Créez</button>
+            <p>Déjà un compte?<a href="./NEW-Login-FR.html">Se connecter</a></p>
+          </form>
+        </div>
+
+        <div class="close">
+        <button onclick="closePopup()">FERMEZ</button>
+        </div>
+        
+  </div>
+    
+</div>
+
+<style>
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .popup-content {
+    background-color: white;
+    margin: auto;
+    padding: 10px;
+    border: 1px solid #888;
+    width: 50%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .popup-content h2 {
+    margin-top: 0;
+  }
+  
+  .popup-content p {
+    margin-bottom: 0;
+  }
+  
+  .popup-content button {
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .popup-content button:hover {
+    background-color: #3e8e41;
+  }
+
+   /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL*/
+      .login-left {
+        margin: auto;
+      	margin-top: 5%;
+      	padding: 0px;
+      }
+
+      img{
+        width: 250px;
+        height: 300px;
+      }
+
+
+      /*RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR*/
+      .login-right {
+        margin: auto;
+      	margin-top: 10%;
+      	padding: 20px;
+      	max-width: 400px;
+      }
+
+      .login-right h2 {
+        margin-top: 0;
+        font-size: 2em;
+        text-align: center;
+      }
+
+      .login-right input[type="email"],
+      .login-right input[type="text"],
+      .login-right input[type="password"], 
+      .login-right input[type="password1"], 
+      .login-right input[type="code"]{
+        padding: 10px;
+        margin-bottom: 20px;
+        border: none;
+        border-bottom: 3px solid #7f8c8d;
+        width: 95%;
+        font-size: 1.5em;
+        text-align: center;
+      }
+
+      .login-right button {
+        background-color: #34495e;
+        color: white;
+        padding: 5px 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-top: 10px;
+        font-size: 1.4em;
+      }
+
+      .login-right button:hover {
+        background-color: #34495e;
+      }
+
+      .login-right p {
+        margin-top: 30px;
+        font-size: 1.2em;
+      }
+
+      .login-right a {
+        color: #7f8c8d;
+        text-decoration: underline;
+      }
+
+      .login-right a:hover {
+        color: #34495e;
+      }
+    </style>
+
+  <script>
+    function validate() {
+        var code = document.getElementById("code").value;
+        var randomCode = Math.floor(Math.random() * 9000) + 1000;
+  
+        if (code == randomCode) {
+          document.getElementById("result").innerHTML = "Login successful!";
+        } else {
+          document.getElementById("result").innerHTML = "Invalid code, please try again.";
+        }
+      }
+      
+  function openPopup() {
+    document.getElementById("popup").style.display = "block";
+  }
+  
+  function closePopup() {
+    document.getElementById("popup").style.display = "none";
+  }
+
+  //confirm
+  function validateForm() {
+    const form = document.getElementById('myForm');
+    const passwordInput = document.querySelector('input[name="password"]');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    const passwordMatchError = document.getElementById('passwordMatchError');
+    const requiredFieldError = document.getElementById('requiredFieldError');
+    const inputs = form.querySelectorAll('input[required]');
+
+    let isComplete = true;
+    inputs.forEach((input) => {
+      if (input.value.trim() === '') {
+        isComplete = false;
+      }
+    });
+
+    if (passwordInput.value !== confirmPasswordInput.value) {
+      passwordMatchError.style.display = 'block';
+      inputIncompleteError.style.display = 'none';
+    } else if (!isComplete) {
+      passwordMatchError.style.display = 'none';
+      inputIncompleteError.style.display = 'block';
+    } else {
+      passwordMatchError.style.display = 'none';
+      inputIncompleteError.style.display = 'none';
+      form.submit();
+    }
+  }
+  </script>
+</head>
+</html>
+  

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>Login Page</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="login-box">
+
+        <!--LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL-->
+        <div class="login-left">
+
+          <h2>Visitor Login</h2>
+
+          <form>
+            <label for="code">Code:</label>
+            <input type="text" id="code" name="code" required>
+            <button type="button" onclick="validate()">Submit</button>
+          </form>
+          <p id="result"></p>
+  
+      
+        <script src="script.js"></script>
+      
+      </div>
+
+        <!--RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR-->
+        <div class="login-right">
+
+          <h2>Client Login</h2>
+
+          <form action="#" method="post">
+            <input type="text" placeholder="Username" name="username" required>
+            <input type="password" placeholder="Password" name="password" required>
+            <button type="submit">Login</button>
+            <p>Don't have an account? <a href="./Enregistrer-EN.html">Register here</a></p>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f5f5f5;
+      }
+
+      .login-box {
+        display: flex;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        width: 800px;
+        height: 500px;
+      }
+
+      /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL*/
+
+      .login-left {
+      	margin: auto;
+      	margin-top: 10%;
+      	padding: 20px;
+      	max-width: 400px;
+      	background-color: white;
+      	border-radius: 5px;
+      	box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      }
+
+      .login-left h2 {
+      	margin-top: 0;
+      	text-align: center;
+      }
+
+      .login-left form {
+      	display: flex;
+      	flex-direction: column;
+      	align-items: center;
+      }
+
+      .login-left label {
+      	margin-top: 10px;
+      }      
+
+      .login-left input[type="text"] {
+      	width: 100%;
+      	padding: 10px;
+      	margin-top: 5px;
+	      border: none;
+	      border-radius: 5px;
+	      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      }
+
+      .login-left button {
+      	width: 100%;
+      	margin-top: 20px;
+	      padding: 10px;
+	      border: none;
+	      border-radius: 5px;
+	      background-color: #4CAF50;
+	      color: white;
+      	cursor: pointer;
+      	transition: background-color 0.3s;
+      }
+
+      .login-left button:hover {
+	      background-color: #3e8e41;
+      }
+
+      .login-left p {
+      	margin-top: 20px;
+	      text-align: center;
+	      font-size: 1.2em;
+	      font-weight: bold;
+	      color: #4CAF50;
+      }
+
+
+      /*RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR*/
+      .login-right {
+        margin: auto;
+      	margin-top: 10%;
+      	padding: 20px;
+      	max-width: 400px;
+      	background-color: white;
+      	border-radius: 5px;
+      	box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      }
+
+      .login-right h2 {
+        margin-top: 0;
+        font-size: 2em;
+        text-align: center;
+      }
+
+      .login-right input[type="text"],
+      .login-right input[type="password"] {
+        padding: 10px;
+        margin-bottom: 20px;
+        border: none;
+        border-bottom: 2px solid #7f8c8d;
+        width: 95%;
+        font-size: 1.2em;
+        text-align: center;
+      }
+
+      .login-right button {
+        background-color: #34495e;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1.2em;
+      }
+
+      .login-right button:hover {
+        background-color: #34495e;
+      }
+
+      .login-right p {
+        margin-top: 20px;
+        font-size: 1.2em;
+      }
+
+      .login-right a {
+        color: #7f8c8d;
+        text-decoration: underline;
+      }
+
+      .login-right a:hover {
+        color: #34495e;
+      }
+    </style>
+
+
+    <script>
+      function validate() {
+        var code = document.getElementById("code").value;
+        var randomCode = Math.floor(Math.random() * 9000) + 1000;
+  
+        if (code == randomCode) {
+          document.getElementById("result").innerHTML = "Login successful!";
+        } else {
+          document.getElementById("result").innerHTML = "Invalid code, please try again.";
+        }
+      }
+    </script>
+
+  </body>
+
+</html>
+
+
+
