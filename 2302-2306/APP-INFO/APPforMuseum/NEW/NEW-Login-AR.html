@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login page</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+
+    <button onclick="openPopup('popupLoginEN')">Click to Login</button>
+
+    <div id="popupLoginEN" class="popup">
+      <div class="popup-content">
+        <title>تسجيل الدخول</title>
+
+        <!--LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL-->
+
+        <div class="login-left">
+          <div style="width: 200px; height: 250px; margin: auto;">
+            <img src="LOGO-museum.png" alt="LOGO-museum">
+          </div>
+          <h2>تسجيل دخول الزائر</h2>
+          <form action="#" method="post">
+            <input type="code" placeholder="كود الزائر" name="code" required>
+            <button type="créer">يُقدِّم</button>
+          </form>
+        </div>
+
+        <div class="login-right">
+          <h2>تسجيل دخول العميل</h2>
+
+          <form action="#" method="post">
+            <input type="text" placeholder="اسم المستخدم" name="username" required>
+            <input type="password" placeholder="كلمة المرور" name="password" required>
+            <button type="submit">تسجيل الدخول</button>
+            <p>ليس لديك حساب؟<a href="./NEW-Enregistrer-AR.html">سجل الان</a></p>
+          </form>
+        </div>
+
+        <div class="close">
+          <button onclick="closePopup()">يغلق</button>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      /* Styles for the popup */
+      .popup {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .popup-content {
+        background-color: white;
+        margin: auto;
+        padding: 10px;
+        border: 1px solid #888;
+        width: 60%;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .popup-content h2 {
+        margin-top: 0;
+        margin: auto;
+      }
+
+      .popup-content p {
+        margin-bottom: 0;
+      }
+
+      .popup-content button {
+        display: block;
+        margin: 0 auto;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .popup-content button:hover {
+        background-color: #3e8e41;
+      }
+
+      /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL*/
+      .login-left {
+        margin: auto;
+        margin-top: 0;
+        padding: 20px;
+        max-width: 400px;
+      }
+
+      img {
+        width: 200px;
+        height: 250px;
+        margin: auto;
+        margin-top: 0;
+        padding: 0px;
+      }
+
+      .login-left h2 {
+        margin-top: 0;
+        font-size: 2em;
+        text-align: center;
+      }
+
+      .login-left input[type="code"] {
+        padding: 10px;
+        margin-bottom: 20px;
+        border: none;
+        border-bottom: 3px solid #7f8c8d;
+        width: 95%;
+        font-size: 1.5em;
+        text-align: center;
+      }
+
+      .login-left button {
+        background-color: #34495e;
+        color: white;
+        padding: 5px 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-top: 10px;
+        font-size: 1.4em;
+      }
+
+      .login-left button:hover {
+        background-color: #34495e;
+      }
+
+      .login-left p {
+        margin-top: 30px;
+        font-size: 1.2em;
+      }
+
+      .login-left a {
+        color: #7f8c8d;
+        text-decoration: underline;
+      }
+
+      .login-left a:hover {
+        color: #34495e;
+      }
+
+      /*RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR*/
+      .login-right {
+        margin: auto;
+        margin-top: 0;
+        padding: 20px;
+        max-width: 400px;
+      }
+
+      .login-right h2 {
+        margin-top: 0;
+        font-size: 2em;
+        text-align: center;
+      }
+
+      .login-right input[type="text"],
+      .login-right input[type="password"] {
+        padding: 10px;
+        margin-bottom: 20px;
+        border: none;
+        border-bottom: 3px solid #7f8c8d;
+        width: 95%;
+        font-size: 1.5em;
+        text-align: center;
+      }
+
+      .login-right button {
+        background-color: #34495e;
+        color: white;
+        padding: 5px 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-top: 10px;
+        font-size: 1.4em;
+      }
+
+      .login-right button:hover {
+        background-color: #34495e;
+      }
+
+      .login-right p {
+        margin-top: 30px;
+        font-size: 1.2em;
+      }
+
+      .login-right a {
+        color: #7f8c8d;
+        text-decoration: underline;
+      }
+
+      .login-right a:hover {
+        color: #34495e;
+      }
+    </style>
+
+    <script>
+      function openPopup(popupId) {
+        document.getElementById(popupId).style.display = "block";
+      }
+
+      function closePopup() {
+        var popups = document.getElementsByClassName("popup");
+        for (var i = 0; i < popups.length; i++) {
+          popups[i].style.display = "none";
+        }
+      }
+
+      function login() {
+        // Perform login logic
+        document.getElementById("loginResult").innerHTML = "Login successful!";
+      }
+    </script>
+  </head>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capt'Oeuvre</title>
+</head>
+
+<!--set the background-->
+<style>
+  body{
+    background-image: url("background1-1.png");
+    background-size:100%;
+    background-attachment: fixed;
+  }
+</style>
+
+<!--interface display dateTime-->
+    <script>
+        Date.prototype.format = function (fmt) {
+            var o = {
+                "y+": this.getFullYear, 
+                "M+": this.getMonth() + 1, 
+                "d+": this.getDate(), 
+                "h+": this.getHours(), 
+                "m+": this.getMinutes(), 
+                "s+": this.getSeconds() 
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+
+        setInterval("document.getElementById('dateTime').innerHTML = (new Date()).format('yyyy-MM-dd hh:mm:ss');", 100);  
+        //function new Date() for gets the system time
+        //Runs every 100 milliseconds
+    </script>
+
+    <body>
+        <h1 style="font-family:arial;font-size:15px;text-align:right">
+        <div id="dateTime"></div>
+        </h1>
+    </body>
+
+<!--interface display LOGO-->
+    <body>
+        <img src="LOGO.jpg" alt="LOGOforCapt'Oeuvre" height="80" width="260"/> 
+    </body>
+
+<!--Navigation bar-->
+<head>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    
+      .topnav {
+        overflow: hidden;
+        background-color: #38835b;
+      } /* Set the background colour*/
+    
+      .topnav a {
+        float: right;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+      }/* Set the navigation bar font */
+
+      .topnav a:hover {
+        background-color: #ddd;
+        color: black;
+      }/* Colour at cursor selection */
+
+      .topnav a.active {
+        background-color: #04aa6d;
+        color: white;
+      } /* add colour to the link active/current */
+    </style>
+</head>
+
+<body>
+  <div class="topnav">
+    <a class="active" href="#Langue">Langue</a>
+    <a href="#Utilisateur">Utilisateur</a>
+    <a href="#Accueil">Accueil</a>    
+  </div>
+</body>
+
+</html>
