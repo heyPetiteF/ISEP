@@ -1,0 +1,2 @@
+1. 汽车零部件市场 **Automotive aftermarket** is the secondary parts market of the automotive industry, concerned with the manufacturing, remanufacturing, distribution, retailing, and installation of all vehicle parts, chemicals, equipment, and accessories, after the sale of the automobile by the original equipment manufacturer (OEM) to the consumer. The parts, accessories, etc. for sale may or may not be manufactured by the OEM.
+
