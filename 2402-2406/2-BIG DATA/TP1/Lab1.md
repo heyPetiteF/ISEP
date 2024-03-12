@@ -48,7 +48,8 @@ CREATE TABLE SALGRADE
 Identify the different tables created and integrity constraints to ensure data consistency. Draw the entity / relational model from the given database.
 
 Note: Dependents mean a person who depends on another person to be affiliated to the social Security System. In that case a dependent can be a child whose father is an employee (defined by empno link).
-![](./IMG/ex1-ER.jpg)
+
+![](./ex1-ER.jpg)
 
 ## 3. First integrity Constraint
 

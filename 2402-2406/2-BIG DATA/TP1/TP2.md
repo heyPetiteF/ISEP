@@ -126,7 +126,13 @@ BEGIN
 END
 $procedure$
 ```
-
+```
+CALL public.exercise5()
+```
+```
+SELECT * FOME public.emp
+ORDER BY empno ASC
+```
 
 
 
