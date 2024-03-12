@@ -23,3 +23,10 @@
 
 # Q #
 1. "with different cross-validation folds of the data. "(Mahendra Khened et al., 2021, p. 7)
+
+
+
+# 1
+choose\download->which paper -> method/model
+
+
