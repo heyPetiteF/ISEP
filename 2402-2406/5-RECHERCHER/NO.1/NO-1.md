@@ -16,7 +16,7 @@
 6. Patch sampling technology
 7. GICN
 8. scaled exponential linear unit (SELU)
-9. 
+
 
 
 
@@ -25,8 +25,8 @@
 1. "with different cross-validation folds of the data. "(Mahendra Khened et al., 2021, p. 7)
 
 
+# Survey of segmentation of histological imaging
 
-# 1
-choose\download->which paper -> method/model
+
 
 
