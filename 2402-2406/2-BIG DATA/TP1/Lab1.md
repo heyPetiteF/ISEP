@@ -190,7 +190,7 @@ SELECT table_name FROM information_schema.tables where table_schema = 'public';
 
 ```
 SELECT * FROM EMP 
-WHERE COMN > SAL;
+WHERE COMM > SAL;
 ```
 
 3. Select employees earning between 1200 and 2400  (earning is sal + commision)
@@ -279,6 +279,17 @@ WHERE (SAL + COALESCE(COMM, 0))  > (SELECT (SAL + COALESCE(COMM, 0))  FROM EMP W
 SELECT EMPNO, ENAME, SAL, COMM, CONCAT(SAL, ' / ', COALESCE(COMM, 'N/A')) AS SAL_COMM
 FROM EMP;
 ```
+但出现报错：
+```
+ERROR:  invalid input syntax for type integer: "N/A"
+```
+遇到类型不匹配的错误是因为 CONCAT 函数尝试将整数（SAL）和字符串（'N/A'）连接在一起，但是 COALESCE 函数需要所有参数类型相同。
+修改代码如下：
+```
+SELECT EMPNO, ENAME, SAL, COMM, SAL::TEXT || ' / ' || COALESCE(COMM::TEXT, 'N/A') AS SAL_COMM
+FROM EMP;
+```
+
 
 15. List department numbers which are both in table EMP and in table DEPT 
 
@@ -311,6 +322,7 @@ WHERE e.DEPTNO <> b.DEPTNO
 1. WHERE e.DEPTNO <> b.DEPTNO：这个条件用于筛选那些员工和他们经理所在部门编号不同的记录。
 2. <>是SQL中表示“不等于”的操作符。因此，这个条件排除了那些与他们的经理在同一个部门的员工，只留下了部门编号不同的那些员工记录。
 
+
 18. List employees working in a department having at least one CLERK 
 
 ```
@@ -340,4 +352,126 @@ OR SAL > (SELECT SAL FROM EMP WHERE ENAME = 'FORD');
 ```
 SELECT E1.ENAME, E1.ENAME, E1.TEL, E2.ENAME AS MANAGER
 FROM EMP E1 INNER JOIN EMP E2 ON E1.MGR = E2.EMPNO;
+```
+
+# Exercise 3
+1. Create a Table for employee’s Projects: Each employee is working on one or several projects. Create a table "project" containing the number, name, starting date and budget of each project
+Write the corresponding SQL Request:
+- Table name is: "project"
+- Attributes are: "projno", "pname", "startdate", "budget"
+```
+CREATE TABLE project (
+    projno INTEGER PRIMARY KEY,
+    pname VARCHAR(255),
+    startdate DATE,
+    budget DECIMAL
+);
+```
+2. Create the Join Table: An Employee can work on many projects and a project can be affected by many employees. Create the necessary tools for that. Insert some elements in the tables.Write the SQL query to create the corresponding table (name of the table is : "project_emp"). Tip:
+
+- don't forget foreign keys
+- Write some requests to insert elements in the table:
+- You should have 4 projects in the project table
+- In the join table ‘project_emp’ you should have at least 30 lines.
+- One of the employee should be assigned to all the projects
+
+        1. 创建一个关联表来存储员工与项目之间的关系。这个表将包含外键，分别指向员工表（假设名为 EMP）和项目表（project）
+```
+CREATE TABLE project_emp (
+    empno INTEGER,
+    projno INTEGER,
+    PRIMARY KEY (empno, projno),
+    FOREIGN KEY (empno) REFERENCES EMP (EMPNO),
+    FOREIGN KEY (projno) REFERENCES project (projno)
+);
+```
+        2.插入4个项目的数据
+```
+INSERT INTO project (projno, pname, startdate, budget) VALUES
+(1, 'Project A', '2024-01-01', 100000),
+(2, 'Project B', '2024-02-01', 200000),
+(3, 'Project C', '2024-03-01', 300000),
+(4, 'Project D', '2023-04-01', 400000);
+
+```
+
+        3. 向 project_emp 表插入数据
+```
+-- 将编号为7369的员工分配到所有项目
+INSERT INTO project_emp (empno, projno) VALUES
+(7369, 1),
+(7369, 2),
+(7369, 3),
+(7369, 4);
+
+-- 为其他员工分配项目，确保总记录数达到至少30条
+-- 以下是根据提供的员工编号随机分配项目的示例
+INSERT INTO project_emp (empno, projno) VALUES
+(7499, 1),
+(7521, 2),
+(7566, 3),
+(7654, 4),
+(7698, 1),
+(7782, 2),
+(7788, 3),
+(7839, 4),
+(7844, 1),
+(7876, 2),
+(7900, 3),
+(7902, 4),
+(7934, 1),
+(7499, 3),
+(7521, 4),
+(7566, 1),
+(7654, 2),
+(7698, 3),
+(7782, 4),
+(7788, 1),
+(7839, 2),
+(7844, 3),
+(7876, 4),
+(7900, 1),
+(7902, 2),
+(7934, 3);
+```
+3. List all employees (by empno) who work on all projects?
+```
+SELECT empno
+FROM project_emp
+GROUP BY empno
+HAVING COUNT(DISTINCT projno) = (SELECT COUNT(*) FROM project);
+```
+
+4. Options on View creation: Explain the following instruction
+```
+CREATE VIEW sales_staff AS
+SELECT empno, ename, deptno
+FROM emp
+WHERE deptno = 10 WITH CHECK OPTION
+```
+
+- “CREATE VIEW” statement creates a view named sales_staff, Select the data from the three fields empno, ename and deptno from the emp table, which only contains information about employees with department number 10.
+
+- “WITH CHECK OPTION” ensures that all data modifications through the view (including insert and update operations) will comply with the “WHERE “condition in the view definition: all insert or update operations through the sales_staff view must ensure that deptno remains 10.
+
+5. View Creation: Create the view and try the following queries, explain the result
+
+INSERT INTO sales_staff VALUES (7584, 'OSTER', 10);
+
+INSERT INTO sales_staff VALUES (7591, 'WILLIAMS', 30);
+
+6. Division Query: Find all employees that are assigned to all projects.
+```
+SELECT empno
+FROM project_emp
+GROUP BY empno
+HAVING COUNT(DISTINCT projno) = (SELECT COUNT(*) FROM project);
+```
+
+7. Analyze: Give the number of projects per employee and display only employees assigned to at least 2 projects
+```
+SELECT empno, COUNT(projno) AS num_projects
+FROM project_emp
+GROUP BY empno
+HAVING COUNT(projno) >= 2;
 ```
