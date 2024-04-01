@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Management</title>
+</head>
+<body>
+<h1>Employee Management</h1>
+
+<div>
+    <button onclick="getEmployees()">Load Employees</button>
+</div>
+
+<ul id="employees"></ul>
+
+<script>
+    function getEmployees() {
+        fetch('/employees')
+            .then(response => response.json())
+            .then(data => {
+                const list = document.getElementById('employees');
+                list.innerHTML = '';
+                data.forEach(emp => {
+                    const item = document.createElement('li');
+                    item.appendChild(document.createTextNode(`${emp.name} - ${emp.position}`)); // Adjust according to your Emp model
+                    list.appendChild(item);
+                });
+            })
+            .catch(error => console.error('Error loading employees:', error));
+    }
+</script>
+</body>
+</html>
