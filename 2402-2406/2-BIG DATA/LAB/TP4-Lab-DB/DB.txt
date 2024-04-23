@@ -1,0 +1,12 @@
+```
+cqlsh> CREATE KEYSPACE demoVideo
+        • WITH REPLICATION = {
+        • 'class': 'SimpleStrategy'
+        ,
+        • 'replication_factor' : 1
+        • };
+```
+```
+cqlsh> desc keyspaces;
+```
+```
