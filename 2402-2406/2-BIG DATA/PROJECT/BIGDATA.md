@@ -113,5 +113,3 @@ http://localhost:9200
 4. **数据索引 (data_indexing.py)**: 负责将合并后的数据索引到 Elasticsearch 中。
 5. **数据管道 (data_pipeline.py)**: 负责串联以上所有步骤，确保数据从提取到索引的整个流程顺利进行。
 6. **数据分析 (data_analysis.py 和 data_analysis_2.py)**: 负责对数据进行描述性统计分析、可视化和建模分析。
-
-你现在的脚本覆盖了数据提取、数据分析和初步的可视化，但为了完整的项目流程，建议你继续编写 `data_formatting.py`, `data_combination.py`, 和 `data_indexing.py`，并创建 `data_pipeline.py` 来整合所有步骤。

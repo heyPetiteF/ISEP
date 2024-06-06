@@ -1,13 +1,13 @@
 import pandas as pd
 from datetime import datetime
 
-# 读取空气质量数据
+# Read air quality data
 air_quality_df = pd.read_csv('air_quality_data.csv')
 
-# 格式化空气质量数据
+# Format air quality data
 air_quality_df['date'] = pd.to_datetime(air_quality_df['date'])
 
-# 重命名列名
+# Rename columns
 air_quality_df = air_quality_df.rename(columns={
     'h.v': 'humidity',
     'p.v': 'pressure',
@@ -17,10 +17,10 @@ air_quality_df = air_quality_df.rename(columns={
     'wg.v': 'wind_gust'
 })
 
-# 处理缺失值（例如：填充缺失值或删除含有缺失值的行）
-air_quality_df = air_quality_df.dropna()  # 这里选择删除缺失值的行，或者可以使用 air_quality_df.fillna(method='ffill') 填充缺失值
+# Handle missing values (e.g., fill missing values or drop rows with missing values)
+air_quality_df = air_quality_df.dropna()  # Here we choose to drop rows with missing values, or you can use air_quality_df.fillna(method='ffill') to fill missing values
 
-# 确保数据类型正确
+# Ensure correct data types
 air_quality_df['humidity'] = air_quality_df['humidity'].astype(float)
 air_quality_df['pressure'] = air_quality_df['pressure'].astype(float)
 air_quality_df['pm25'] = air_quality_df['pm25'].astype(float)
@@ -28,19 +28,19 @@ air_quality_df['temperature'] = air_quality_df['temperature'].astype(float)
 air_quality_df['wind_speed'] = air_quality_df['wind_speed'].astype(float)
 air_quality_df['wind_gust'] = air_quality_df['wind_gust'].astype(float)
 
-# 保存格式化后的空气质量数据
+# Save formatted air quality data
 air_quality_df.to_csv('formatted_air_quality_data.csv', index=False)
 
-# 读取流感数据
+# Read flu data
 flu_df = pd.read_csv('flu_data.csv')
 
-# 格式化流感数据
+# Format flu data
 flu_df['release_date'] = pd.to_datetime(flu_df['release_date'])
 
-# 处理缺失值
-flu_df = flu_df.dropna()  # 同样地，这里选择删除缺失值的行，或者使用填充方法
+# Handle missing values
+flu_df = flu_df.dropna()  # Similarly, here we choose to drop rows with missing values, or use a filling method
 
-# 确保数据类型正确
+# Ensure correct data types
 flu_df['issue'] = flu_df['issue'].astype(int)
 flu_df['epiweek'] = flu_df['epiweek'].astype(int)
 flu_df['lag'] = flu_df['lag'].astype(int)
@@ -56,7 +56,7 @@ flu_df['num_age_5'] = flu_df['num_age_5'].astype(float)
 flu_df['wili'] = flu_df['wili'].astype(float)
 flu_df['ili'] = flu_df['ili'].astype(float)
 
-# 保存格式化后的流感数据
+# Save formatted flu data
 flu_df.to_csv('formatted_flu_data.csv', index=False)
 
 print("Data formatting complete. Formatted data saved as CSV.")

@@ -4,52 +4,52 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 
-# 读取CSV文件
+# Read CSV files
 air_quality_df = pd.read_csv('air_quality_data.csv')
 flu_df = pd.read_csv('flu_data.csv')
 
-# 数据清洗和预处理
+# Data cleaning and preprocessing
 air_quality_df['date'] = pd.to_datetime(air_quality_df['date'])
 flu_df['release_date'] = pd.to_datetime(flu_df['release_date'])
 
-# 打印数据集以检查内容
+# Print datasets to check contents
 print("\nAir Quality Data:")
 print(air_quality_df)
 print("\nFlu Data:")
 print(flu_df)
 
-# 打印日期范围
+# Print date ranges
 print("\nAir Quality Data Date Range:")
 print(air_quality_df['date'].min(), air_quality_df['date'].max())
 print("\nFlu Data Date Range:")
 print(flu_df['release_date'].min(), flu_df['release_date'].max())
 
-# 尝试不同的合并方法
+# Try different merging methods
 merged_df = pd.merge(flu_df, air_quality_df, left_on='release_date', right_on='date', how='inner')
 
-# 打印合并后的数据集以检查内容
+# Print merged dataset to check contents
 print("\nMerged Data:")
 print(merged_df)
 
-# 选择相关列进行分析
+# Select relevant columns for analysis
 analysis_df = merged_df[['release_date', 'num_ili', 'pm25.v']].dropna()
 
-# 数据检查
+# Data inspection
 print("\nMerged Data Info:")
 print(analysis_df.info())
 
-# 相关性分析
+# Correlation analysis
 correlation = analysis_df['num_ili'].corr(analysis_df['pm25.v'])
 print(f"\nCorrelation between PM2.5 and ILI: {correlation}")
 
-# 数据可视化
+# Data visualization
 plt.scatter(analysis_df['pm25.v'], analysis_df['num_ili'])
 plt.xlabel('PM2.5 Level')
 plt.ylabel('Number of ILI Cases')
 plt.title('PM2.5 vs ILI Cases')
 plt.show()
 
-# 构建预测模型
+# Build a prediction model
 X = analysis_df[['pm25.v']]
 y = analysis_df['num_ili']
 
@@ -61,11 +61,11 @@ if len(X) > 0:
 
     y_pred = model.predict(X_test)
 
-    # 计算均方误差
+    # Calculate mean squared error
     mse = mean_squared_error(y_test, y_pred)
     print(f"\nMean Squared Error: {mse}")
 
-    # 可视化预测结果
+    # Visualize prediction results
     plt.scatter(X_test, y_test, color='black', label='Actual')
     plt.scatter(X_test, y_pred, color='blue', label='Predicted')
     plt.xlabel('PM2.5 Level')

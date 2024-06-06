@@ -2,22 +2,22 @@ from elasticsearch import Elasticsearch, helpers
 import pandas as pd
 
 try:
-    # 读取合并后的数据集
+    # Read the combined dataset
     combined_df = pd.read_csv('combined_data.csv')
 
-    # 连接到 Elasticsearch
+    # Connect to Elasticsearch
     es = Elasticsearch(['http://localhost:9200'])
 
-    # 检查 Elasticsearch 连接
+    # Check Elasticsearch connection
     if not es.ping():
         raise ValueError("Elasticsearch connection failed.")
 
-    # 创建索引（如果不存在）
+    # Create index (if it doesn't exist)
     index_name = 'air_quality_flu_data'
     if not es.indices.exists(index=index_name):
         es.indices.create(index=index_name)
 
-    # 准备数据以进行批量索引
+    # Prepare data for bulk indexing
     actions = [
         {
             "_index": index_name,
@@ -26,7 +26,7 @@ try:
         for _, row in combined_df.iterrows()
     ]
 
-    # 批量索引数据
+    # Bulk index data
     helpers.bulk(es, actions)
 
     print("Data indexing complete. Data indexed to Elasticsearch.")

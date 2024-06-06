@@ -2,22 +2,22 @@ import requests
 import pandas as pd
 from datetime import datetime, timedelta
 
-# 直接在脚本中嵌入API密钥和URL
-AQI_API_TOKEN = 'ef523b682a02576fd62939114fb78b63dfe9e5ad'
+# Embed the API key and URL directly in the script
+AQI_API_TOKEN = ''
 FLUVIEW_API_URL = 'https://api.delphi.cmu.edu/epidata/fluview/'
 
-# 获取空气质量数据
+# Function to fetch air quality data
 def fetch_air_quality_data(city):
     url = f'https://api.waqi.info/feed/{city}/?token={AQI_API_TOKEN}'
     response = requests.get(url)
     data = response.json()
-    print("Air Quality API Response:", data)  # 打印调试信息
+    print("Air Quality API Response:", data)  # Print debug information
     if data['status'] == 'ok' and 'data' in data:
         return data['data']
     else:
         raise ValueError(f"Failed to retrieve air quality data: {data}")
 
-# 获取流感监测数据
+# Function to fetch flu surveillance data
 def fetch_flu_data(regions, epiweeks):
     params = {
         'regions': ','.join(regions),
@@ -34,10 +34,10 @@ def fetch_flu_data(regions, epiweeks):
         raise ValueError(f"Failed to retrieve flu data: {response.status_code}")
 
 try:
-    # 获取芝加哥的空气质量数据
+    # Fetch air quality data for Chicago
     air_quality_data = fetch_air_quality_data('chicago')
 
-    # 检查数据结构并转换为DataFrame
+    # Check data structure and convert to DataFrame
     if 'iaqi' in air_quality_data:
         iaqi_data = air_quality_data['iaqi']
         air_quality_df = pd.json_normalize(iaqi_data)
@@ -45,14 +45,14 @@ try:
     else:
         raise ValueError("Invalid air quality data structure")
 
-    # 获取流感监测数据
-    regions = ['il']  # 以伊利诺伊州为例
-    epiweeks = ['202201', '202202', '202203']  # 示例的epiweeks列表，请根据需要调整
+    # Fetch flu surveillance data
+    regions = ['il']  # Example for Illinois
+    epiweeks = ['202201', '202202', '202203']  # Example list of epiweeks, adjust as needed
     flu_data = fetch_flu_data(regions, epiweeks)
     if flu_data:
         flu_df = pd.DataFrame(flu_data)
 
-        # 将数据保存为CSV
+        # Save data to CSV
         air_quality_df.to_csv('air_quality_data.csv', index=False)
         flu_df.to_csv('flu_data.csv', index=False)
         print("Data ingestion complete. Air quality and flu data saved as CSV.")
@@ -62,7 +62,7 @@ try:
 except Exception as e:
     print(f"Error: {e}")
 
-# 生成样本空气质量数据
+# Generate sample air quality data
 air_quality_data = {
     'h.v': [54, 55, 56],
     'p.v': [1004.2, 1005.0, 1003.8],
@@ -76,7 +76,7 @@ air_quality_data = {
 air_quality_df = pd.DataFrame(air_quality_data)
 air_quality_df.to_csv('air_quality_data.csv', index=False)
 
-# 生成样本流感数据
+# Generate sample flu data
 flu_data = {
     'release_date': [(datetime.now() - timedelta(days=i)).strftime('%Y-%m-%d') for i in range(3)],
     'region': ['il', 'il', 'il'],

@@ -1,30 +1,30 @@
 import pandas as pd
 
 try:
-    # 读取格式化后的数据
+    # Read the formatted data
     air_quality_df = pd.read_csv('formatted_air_quality_data.csv')
     flu_df = pd.read_csv('formatted_flu_data.csv')
 
-    # 确保数据列存在
+    # Ensure the necessary columns exist
     if 'date' not in air_quality_df.columns or 'release_date' not in flu_df.columns:
         raise ValueError("Missing 'date' or 'release_date' columns in the data.")
 
-    # 检查数据类型
+    # Check data types
     air_quality_df['date'] = pd.to_datetime(air_quality_df['date'], errors='coerce')
     flu_df['release_date'] = pd.to_datetime(flu_df['release_date'], errors='coerce')
 
-    # 确保日期转换正确
+    # Ensure date conversion is correct
     if air_quality_df['date'].isnull().any() or flu_df['release_date'].isnull().any():
         raise ValueError("Date conversion error in one of the datasets.")
 
-    # 合并数据
+    # Merge data
     merged_df = pd.merge(air_quality_df, flu_df, left_on='date', right_on='release_date')
 
-    # 检查合并后的数据是否为空
+    # Check if merged data is empty
     if merged_df.empty:
         raise ValueError("Merged data is empty. Check the input data for overlapping dates.")
 
-    # 保存合并后的数据
+    # Save merged data
     merged_df.to_csv('combined_data.csv', index=False)
 
     print("Data combination complete. Combined data saved as CSV.")
