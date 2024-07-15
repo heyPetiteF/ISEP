@@ -8,7 +8,7 @@ from sklearn.metrics import mean_squared_error
 air_quality_df = pd.read_csv('air_quality_data.csv')
 flu_df = pd.read_csv('flu_data.csv')
 
-# Data cleaning and preprocessing
+# Data preprocessing
 air_quality_df['date'] = pd.to_datetime(air_quality_df['date'])
 flu_df['release_date'] = pd.to_datetime(flu_df['release_date'])
 
@@ -53,7 +53,7 @@ plt.show()
 X = analysis_df[['pm25.v']]
 y = analysis_df['num_ili']
 
-if len(X) > 0:
+if len(X) > 1:  # Ensure there is enough data for training
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
     model = LinearRegression()

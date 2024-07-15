@@ -1,0 +1,80 @@
+Partl：AdvancedSQLandPL/SQL
+1.
+What is a database index?Name a datastructure used to maintain indexes.
+2.Is the response time(in seconds) a good metric to analyze queries?Why?
+3.
+What is a database transaction and what is a database lock?
+4.What is a role in a database and what it is useful for?
+5.What is the relationship between database views and database security?
+
+Consider the following table for questions 6， 7， 8， 9 and 10：
+CREATE TABLE employees(
+employee_id NUMBER(6) CONSTRAIN Temp_id_nn NOT NULL，
+first_name VARCHAR 2(20) ，
+last_name VARCHAR 2(25) CONSTRAIN Temp_last_name_nn NOT NULL，
+email VARCHAR 2(25) CONSTRAIN Temp_email_nn NOT NULL
+phone_number VARCHAR 2(20) ，
+hire_date DATE CONSTRAIN Temp_hire_date_nn NOT NULL，
+job_id VARCHAR 2(10) CONSTRAIN Temp job nn NOT NULL
+salary NUMBER(8， 2) ，
+commission_pct NUMBER(2， 2)
+manager_id NUMBER(6) ，
+department_id NUMBER(4) ，
+CONSTRAIN Temp_salary_min CHECK(salary>0) ，
+CONSTRAIN Temp_email_uk UNIQUE(email)
+)；
+6.Write a SQLquery that prints for each employee， its lastname followed by the lastname
+of her manager.Note that manager are also employees
+
+7.Create aPL/SQL block that， given an employee'sid， inserts an asterisk in the stars column
+for every$1000if the employee's salary.For example， if the employee earns$ 8000， the
+string of asterisks should contain eight asterisks.If the employee earns $ 12500， the string
+of asterisks should contain 13 asterisks.Hints：
+1) NVL(e 1， e 2) ：The Oracle NVL() function allows you to re piace null with a more meaningful
+alternative in the results of a query.The NVL() function accepts two arguments.If e1
+evaluates to null， then NVL() function returns e2.If e1 evaluates to non-null， the NVL()function returns e 1.
+2) ROUND(n) ：function to round a number n
+3) s1||s2：operatorforconcatenatingstringss1ands2.
+
+8.Create aPL/SQL block that does the following：
+(a) In the declarative section， declare a variable v_deptno of type NUMBER and assign a
+value that holds the department ID.You can assign the value 10toit.
+(b) Declare a cursor， emp_cursor， that retrieves the last_name， salary， and manager_id of
+the employees working in the department specified in v_deptno.
+(c) In the executable section， use the cursor FOR loop to operate on the data retrieved.If 
+the salary of the employee is less than 5000 and if the manager IDiseither101or 124，
+display the message“<<last_name>>due for a raise.”Otherwise， display the message
+“<<lastname>>not due for a raise.”
+
+9.Create aPL/SQL block that determines the top n salaries of the employees.Follow the
+In the declarative section， dect area variable v_num of type NUMBER that holds a number
+n representing the number of top n earners from the employees table.For example， to
+employees.salary.Dec i areaa cursor.， c_emp_cursor， that retrieves the salariessot
+employees in descending order.Remember that the salaries should not duplicated.
+
+c) In the executable section， open the loop and fetch top n salaries and insert them into the
+top_salaries table.You canusea simple loop to operate the data.AlBO.
+use%ROWCOUNT and%FOUND attributes for the exit condition.Indeed， make sure you
+add an exit condition to avoid having an infinite loop.
+
+10.Write a trigger that verifies that the inserted value for an employee's salary is equal or
+lesser than$100000.lf it is greater， it raises the exception INVALID_SALARY.
+
+Part I|：Big Data
+11.According to you， what ied to the emergence of Big Data?
+12.What defines Big Data?Explain the Big Data's3Vs.
+
+13.Do you know other characteristics“V"(for example， the 5Vs) associated to Big Data?lf
+you do， which ones?
+14.What are horizontal and vertical scaling?What are their advantages and disadvantages?
+15.What does A.C.I.D.mean?
+
+16.Explain the CAP theorem
+17.Cite4typesofNoSQL databases， give an example of application and an example of a
+database management system for each type
+
+Transform the following Mongo DB queries into SQL(or explain what they display) ：
+18.db.person.find{S or：[{sexe："F"} ， {age：50} } } )
+19.db.person.find({user_id：{Sexists：true} } ) .count()
+20.db.person.update({age：{Sgt：25}}{$set：{sexe："F"} }{multi：true} )
+

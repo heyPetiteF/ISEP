@@ -1,4 +1,1 @@
-release_date,region,issue,epiweek,lag,num_ili,num_patients,num_providers,num_age_0,num_age_1,num_age_2,num_age_3,num_age_4,num_age_5,wili,ili
-2024-06-06,il,202339,202201,90,2692,77490,1500,100.0,200.0,300.0,400.0,500.0,600.0,3.5,3.5
-2024-06-05,il,202338,202202,89,1772,75128,1490,110.0,210.0,310.0,410.0,510.0,610.0,2.4,2.4
-2024-06-04,il,202337,202203,88,1287,67778,1485,105.0,205.0,305.0,405.0,505.0,605.0,1.9,1.9
+release_date,region,issue,epiweek,lag,num_ili,num_patients,num_providers,num_age_0,num_age_1,num_age_2,num_age_3,num_age_4,num_age_5,wili,ili,start_date,end_date

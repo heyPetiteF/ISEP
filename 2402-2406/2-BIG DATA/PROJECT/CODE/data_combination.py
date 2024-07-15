@@ -1,39 +1,25 @@
-import pandas as pd
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import col
 
-try:
-    # Read the formatted data
-    air_quality_df = pd.read_csv('formatted_air_quality_data.csv')
-    flu_df = pd.read_csv('formatted_flu_data.csv')
+# Initialize Spark session
+spark = SparkSession.builder \
+    .appName("DataCombination") \
+    .getOrCreate()
 
-    # Ensure the necessary columns exist
-    if 'date' not in air_quality_df.columns or 'release_date' not in flu_df.columns:
-        raise ValueError("Missing 'date' or 'release_date' columns in the data.")
+# Read formatted air quality data
+formatted_air_quality_df = spark.read.csv('formatted_air_quality_data.csv', header=True, inferSchema=True)
 
-    # Check data types
-    air_quality_df['date'] = pd.to_datetime(air_quality_df['date'], errors='coerce')
-    flu_df['release_date'] = pd.to_datetime(flu_df['release_date'], errors='coerce')
+# Read formatted flu data
+formatted_flu_df = spark.read.csv('formatted_flu_data.csv', header=True, inferSchema=True)
 
-    # Ensure date conversion is correct
-    if air_quality_df['date'].isnull().any() or flu_df['release_date'].isnull().any():
-        raise ValueError("Date conversion error in one of the datasets.")
+# Join data on date columns, considering the different possible date columns in flu data
+combined_df = formatted_flu_df.join(formatted_air_quality_df, formatted_flu_df.start_date == formatted_air_quality_df.date, how='inner') \
+                              .drop(formatted_air_quality_df.date)
 
-    # Merge data
-    merged_df = pd.merge(air_quality_df, flu_df, left_on='date', right_on='release_date')
+# Save combined data
+combined_df.write.csv('combined_data.csv', header=True, mode='overwrite')
 
-    # Check if merged data is empty
-    if merged_df.empty:
-        raise ValueError("Merged data is empty. Check the input data for overlapping dates.")
+print("Data combination complete. Combined data saved as CSV.")
 
-    # Save merged data
-    merged_df.to_csv('combined_data.csv', index=False)
-
-    print("Data combination complete. Combined data saved as CSV.")
-
-except FileNotFoundError as e:
-    print(f"File not found: {e.filename}")
-except pd.errors.EmptyDataError:
-    print("No data: One of the input files is empty.")
-except ValueError as e:
-    print(f"Value error: {e}")
-except Exception as e:
-    print(f"An error occurred: {e}")
+# Stop the Spark session
+spark.stop()
