@@ -1,5 +1,4 @@
-# 18/09/2024
-## 5G and Telcos Softwarization
+# 5G and Telcos Softwarization
 1. Technology:
     - 1G: Analog
     - 2G: Digital(GSM,CDMA)
@@ -91,7 +90,7 @@
 - **Network Energy Efficiency:** Network bits per Joule.User bits per Joule
 - **Area Traffic Capacity:** Throughput per m2
 
-### Core Netword Evolution from 4G to 5G ###
+## Core Netword Evolution from 4G to 5G ###
 1. UE(User Equipement): Smartphone，Tablet，Laptop，Wearable Devices，IoT Devices，In-Vehicle Systems，Fixed Wireless Access Devices，VR/AR Devices，USB Dongle，Mobile Hotspot
 2. - User PLANE: 指网络中承载用户数据流的部分。它负责传输实际的用户数据，如网页浏览、视频流、语音通话等。这是网络中用于实际传输用户信息的路径。
         - 数据传输：在用户和互联网或其他通信方之间传递数据。
@@ -124,14 +123,18 @@ https://medium.com/5g-nr/5g-service-based-architecture-sba-47900b0ded0a
     （2）UPF
     （3）PCF
     （4）AUSF
-    （5）UDM
+    （5）UDM-UDR
     （6）NRF
     （7）NEF
     （8）AF
 
-![5G UE reaistration](./IMG/5G%20UE%20reaistration.jpg)
+![5G UE reaistration](./IMG/5G%20UE%20reaistration.png)
 
-### 5G NSA & 5G SA(Stand-Alone)
+Purposes of Regustration:
+    - Initial Access
+    - Mobility 
+
+## 5G NSA & 5G SA(Stand-Alone)
 
 ![](./IMG/5G%20NSA%20and%205G%20SA.png)
 
