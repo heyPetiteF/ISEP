@@ -258,6 +258,7 @@ VMM也被称为Hypervisor（虚拟机管理程序），其主要任务是将底�
     - 托管型虚拟化，Hosted Hypervisor
 
 ### virtualization landscape
+![](./IMG/virtualization%20landscape.png)
 1. **Full Virtualization 完全虚拟化**:
     
     The hypervisor (virtual machine monitor) provides a complete simulation of the underlying hardware, allowing unmodified guest operating systems to run. Examples include VMware and Microsoft Hyper-V.
@@ -355,6 +356,7 @@ VMM也被称为Hypervisor（虚拟机管理程序），其主要任务是将底�
 3. SR-IOV(Single Root I/O Virtualization)
 
 ## Cloud Computing Models: IaaS, PaaS, SaaS
+![](./IMG/Cloud%20Computing%20Models.png)
 
 ### IaaS (Infrastructure as a Service)
 1. **Definition**:
@@ -573,6 +575,47 @@ VMM也被称为Hypervisor（虚拟机管理程序），其主要任务是将底�
    - [ ] Hardware assisted
 
    **分析：** 半虚拟化需要对操作系统进行修改，降低了其在不同平台上的可移植性。
+
+---
+
+## Monolithic vs Microservice Architecture
+
+## Container Runtimes
+
+## **Docker**
+```
+# 使用 Python 3.9 作为基础镜像
+FROM python:3.9-slim
+
+# 设置工作目录
+WORKDIR /app
+
+# 复制当前目录的内容到工作目录
+COPY . /app
+
+# 安装 Python 依赖
+RUN pip install -r requirements.txt
+
+# 设置环境变量
+ENV PYTHONUNBUFFERED=1
+
+# 暴露容器的端口 5000
+EXPOSE 5000
+
+# 设置容器启动时的默认命令
+CMD ["python", "app.py"]
+```
+
+- **构建镜像**： 在应用程序目录中运行以下命令构建 Docker 镜像：
+```
+docker build -t my-python-app .
+```
+
+- **运行容器**： 构建完成后，可以使用以下命令运行容器：
+```
+docker run -p 5000:5000 my-python-app
+```
+
 
 
 
