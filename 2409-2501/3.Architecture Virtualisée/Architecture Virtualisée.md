@@ -617,5 +617,237 @@ docker run -p 5000:5000 my-python-app
 ```
 
 
+# 16102024
+## GSM（Global System for Mobile Communications）
+GSM，即全球移动通信系统，是一种广泛使用的蜂窝网络标准。它最早由欧洲电信标准协会（ETSI）在20世纪80年代开发，旨在为全球提供统一的移动通信标准。GSM 被认为是第二代（2G）移动通信技术的代表，其最大的特点是支持语音通信、短信（SMS）、以及低速数据传输。
 
+### GSM 的主要特点：
+- **数字信号处理**：
 
+GSM 使用数字信号处理技术来传输语音和数据，相比早期的模拟通信系统（如 AMPS），数字系统更具保密性、可靠性和抗干扰性。
+- **频率分配**：
+
+GSM 使用频分多址（FDMA）和时分多址（TDMA）技术。在频分多址中，不同的用户使用不同的频率进行通信；在时分多址中，多个用户在相同的频率上以不同的时间段（时隙）进行通信。
+- **国际漫游**：
+
+GSM 提供了全球漫游能力，允许用户在不同国家使用相同的手机设备进行通信。通过标准化的协议，用户可以在支持 GSM 的任何地区自由切换网络。
+- **支持多种服务**：
+
+除了基本的语音通话，GSM 还支持短信（SMS）、低速数据传输、传真服务，以及呼叫转移、呼叫等待等功能。
+- **SIM 卡**：
+
+GSM 系统的另一个重要特点是使用 SIM 卡（Subscriber Identity Module）。SIM 卡存储用户的身份信息、电话号码、通讯录等，通过插入任意兼容 GSM 网络的手机，用户可以快速访问个人数据和服务。
+### GSM 的架构
+GSM 系统的架构复杂且模块化，主要由以下几大组件构成：
+
+1.  **移动台（Mobile Station，MS）**：
+
+    移动台即我们常说的手机，用户通过它访问 GSM 网络。移动台由用户设备（UE）和SIM 卡组成。SIM 卡包含用户的身份信息，并存储联系人、短信等数据。
+2. **基站子系统（Base Station Subsystem，BSS）**：
+
+    BSS 是 GSM 网络的接入部分，负责在手机与核心网络之间建立通信。它包括：
+3. **基站控制器（Base Station Controller，BSC）**：
+
+    管理多个基站并负责分配资源、移动性管理和切换等。
+4. **基站收发台（Base Transceiver Station，BTS）**：
+    负责无线信号的传输，连接手机与网络。
+5. **网络与交换子系统（Network and Switching Subsystem，NSS）**：
+
+    NSS 是 GSM 网络的核心部分，负责用户的身份管理、呼叫路由、计费等功能。它包括以下关键组件：
+6. **移动交换中心（Mobile Switching Center，MSC）**：
+    
+    MSC 是 GSM 网络的核心，它负责呼叫建立、呼叫切换、短信传输、用户漫游和计费等任务。
+7. **归属位置寄存器（Home Location Register，HLR）**：
+
+    HLR 是一个数据库，存储用户的永久身份信息、服务状态等。
+8. **访客位置寄存器（Visitor Location Register，VLR）**：
+
+    VLR 是临时数据库，存储正在访问特定区域的用户的临时信息。
+9. **鉴权中心（Authentication Center，AuC）**：
+    
+    负责用户的身份验证和网络接入授权。
+10. **设备身份寄存器（Equipment Identity Register，EIR）**：
+
+    存储设备的唯一标识号，用于防止被盗设备访问网络。
+11. **运营支持子系统（Operation Support Subsystem，OSS）**：
+
+    OSS 提供了网络的管理和维护功能，帮助运营商监控和优化网络性能，进行故障处理和资源管理。
+
+### GSM 工作原理
+GSM 网络的工作流程大致如下：
+
+1. 接入网络：
+
+    当手机开启时，移动台会搜索附近的基站，并通过最强信号的基站接入网络。
+手机的 SIM 卡会向网络发送用户的身份信息（IMSI）和设备信息（IMEI），基站接收到信息后，通过 MSC 进行用户鉴权。
+如果用户成功通过鉴权，网络将允许用户接入，并在 VLR 中注册用户的位置信息。
+2. 呼叫建立：
+
+    当用户发起呼叫时，手机将信号通过基站传递到 MSC。MSC 根据呼叫的目标，决定是否在本地网络处理，还是通过其他网络（如 PSTN 公共电话网络）进行呼叫路由。
+MSC 会将呼叫请求传递到目标用户的 MSC，随后目标用户的手机振铃，双方通过基站建立通话。
+3. 呼叫切换（Handover）：
+
+    当用户在通话中移动时，手机可能会离开当前基站的覆盖范围。为了保持通话不中断，GSM 支持切换（Handover）功能，即在通话过程中将连接从一个基站转移到另一个基站。
+切换可以在同一个 BSC 内进行，也可以跨多个 BSC 进行，由 MSC 管理和协调。
+4. 短信服务（SMS）：
+
+    短信在 GSM 网络中作为一种非常基础的消息传递服务，短信消息通过短消息服务中心（Short Message Service Center，SMSC）进行处理。
+当用户发送短信时，消息通过 BSS 传递到 MSC，再由 MSC 传递给 SMSC。SMSC 负责将消息路由到接收方。
+5. GSM 频率和技术细节
+G   SM 系统使用的频率范围有所不同，具体取决于地区和运营商的规定。常见的频段包括：
+
+- 900 MHz：主要用于欧洲和亚洲地区。
+- 1800 MHz：也是在欧洲和亚洲使用，但提供更高的频谱容量。
+- 850 MHz 和 1900 MHz：主要用于北美地区。
+6. GSM 使用时分多址（TDMA）来将频率分成多个时隙，每个时隙为一个用户服务。这种方式有效提高了频谱利用率。通常，一个频率可以分为 8 个时隙（每秒钟 8 个用户可以共享同一个频率进行通信）。
+
+### GSM 的演进
+GSM 是 2G 通信技术的代表，但随着技术的发展，它逐步升级并支持了更高的通信速率：
+
+- GPRS（General Packet Radio Service）：这是一种 2.5G 技术，通过分组交换技术为 GSM 增加了数据通信能力，允许用户进行持续的数据连接（如上网和收发邮件）。
+
+- EDGE（Enhanced Data rates for GSM Evolution）：作为 GSM 网络的增强版本，EDGE 被称为 2.75G，它进一步提升了数据传输速率，接近 3G 的水平。
+
+- 3G 和 LTE：随着 3G 和 4G LTE 技术的引入，GSM 网络逐步被更先进的技术取代。然而，GSM 网络由于其成熟和广泛的覆盖，仍然在一些地区被用于基础通信服务，特别是语音和短信业务。
+
+### GSM 的优缺点
+- 优点：
+    - 全球标准化：GSM 是一种全球标准，用户可以在世界各地进行漫游。
+    - 稳定的语音质量：由于采用了数字信号处理技术，GSM 的语音质量优于早期的模拟系统。
+    - 安全性：GSM 通过加密和身份验证机制提高了通信的安全性。
+- 缺点：
+    - 数据速率较低：GSM 原生的数据传输速度非常有限，虽然通过 GPRS 和 EDGE 技术有所提升，但仍远不及现代的 3G 和 4G 网络。
+    - 频率拥挤：由于 GSM 使用的频段较为固定，在人口密集的地区容易出现频率拥挤的问题。
+
+## Interface in the UTRAN architecture
+
+## Handover
+
+## NAS 
+
+## Location Area Update (LAU) 
+Location Area Update (LAU) 是 GSM、UMTS 和 LTE 等移动网络中一种用于更新用户设备（UE）位置信息的过程。
+当用户在网络的覆盖区域内移动时，手机需要定期向网络报告其当前位置，以便网络能够随时路由来电或短信给用户。
+这个过程在电路交换（Circuit-Switched, CS）域和分组交换（Packet-Switched, PS）域都存在，但工作方式和涉及的组件略有不同。
+
+### In CS domain
+在 CS 域中，LAU 是用于更新用户设备在 Location Area（位置区） 内的移动性管理机制，主要涉及语音通话、短信等需要电路交换的服务。
+LAU 的基本目的是确保用户在不同的位置区移动时，网络能够跟踪用户的位置，以便随时提供呼叫和消息路由。
+
+在 CS 域中，LAU 的过程通常由以下几个步骤组成：
+
+1. 移动台发起 LAU 请求：
+
+    当用户设备检测到它已进入一个新的位置区（或达到定期更新的时间点），它会向网络发起 Location Area Update Request（LAU 请求）。这个请求通过无线链路发送到最近的基站（BTS），并传递给核心网络的 移动交换中心（Mobile Switching Center, MSC）。
+2. MSC 和 VLR 处理请求：
+    
+    MSC 负责管理语音通话和短信的交换，是 CS 域的核心节点。MSC 接收到 LAU 请求后，会检查用户设备的身份信息（通过 SIM 卡的 IMSI 或 TMSI）并转发请求到 访客位置寄存器（Visitor Location Register, VLR）。
+VLR 是一个数据库，存储着当前在该位置区内的所有用户的临时位置信息。当用户进入新位置区时，VLR 会更新用户的位置信息。
+3. VLR 与 HLR 的交互：
+
+    如果用户设备移动到了一个新的位置区且该位置区归属不同的 VLR 管理（即从一个 VLR 覆盖区域进入另一个 VLR 的覆盖区域），新的 VLR 需要与用户的 归属位置寄存器（Home Location Register, HLR） 交互。
+HLR 是存储用户永久信息的中央数据库，记录了用户的服务配置、电话号码和当前所在的 VLR 等。当用户进入新的 VLR 覆盖区域时，新 VLR 会向 HLR 注册用户的位置信息，并要求 HLR 更新记录中的 VLR 信息。
+同时，旧的 VLR 会从它的数据库中删除该用户的信息。
+4. 响应用户设备：
+
+    完成位置更新后，VLR 会将结果传递给 MSC，MSC 再通过基站将 LAU 接受（Location Area Update Accept） 消息发送回用户设备。
+如果位置更新成功，用户设备会回复 LAU 完成（Location Area Update Complete） 消息，并且新的位置信息正式生效。
+涉及的协议和信令
+5. RRC（Radio Resource Control）：
+
+    RRC 是在移动设备和基站之间运行的协议，负责控制和管理无线资源。在 LAU 过程中，RRC 负责建立无线连接以传输 LAU 信令。
+6. MM（Mobility Management）：
+
+    移动性管理协议负责控制用户设备的移动性，包括处理位置区更新、设备鉴权等。在 CS 域中，MM 协议直接管理 LAU 流程。
+7. TMSI（Temporary Mobile Subscriber Identity）：
+
+    为了保护用户隐私，移动网络使用 TMSI 作为用户设备的临时标识符。TMSI 通常由 VLR 分配，并且可以定期更换。用户设备通过 TMSI 与网络交互，而不是使用永久的 IMSI。
+
+## MME（Mobility Management Entity）
+MME（Mobility Management Entity） 是 LTE（长期演进，Long Term Evolution）网络的核心控制节点，主要用于管理用户设备（UE）的接入、移动性以及与核心网络的交互。
+MME 是 LTE 网络中最为重要的控制节点，负责移动性管理、会话管理、用户鉴权和安全管理等任务。它不直接处理用户的数据流量，而是专注于控制信令，确保用户设备能够顺利接入网络，并在网络中无缝移动。
+MME 的功能在 5G 中被 AMF 等新网络功能所继承和扩展，以应对更加复杂和高效的通信需求。
+### MME 的主要功能
+MME 作为 LTE 核心网的控制平面节点，承担了多个重要职责，主要包括以下几个方面：
+
+1. 移动性管理（Mobility Management）
+    - 空闲模式移动性管理：当用户设备处于空闲状态时（即没有活跃的数据会话），MME 负责追踪用户的位置。它管理 UE 所在的 追踪区（Tracking Area, TA），并处理 Tracking Area Update（TAU） 请求。当 UE 从一个 TA 移动到另一个 TA 时，MME 负责更新 UE 的位置信息。
+
+    - 连接状态下的移动性管理：在活跃状态下，当用户跨越基站或小区时，MME 负责与基站（eNodeB）协同，完成用户会话的切换过程（Handover），确保移动过程中不丢失连接。
+
+2. 会话管理（Session Management）
+
+    - MME 负责管理用户会话的建立、维护和释放。它通过与 Serving Gateway（S-GW） 和 Packet Data Network Gateway（P-GW） 的交互，处理用户的会话请求。
+    - 负责创建 默认承载（Default Bearer） 和 专用承载（Dedicated Bearer）。默认承载提供了用户设备和网络之间的基本 IP 连接，而专用承载则为特定应用（如视频通话）提供高优先级的数据传输通道。
+3. 用户鉴权（Authentication）
+    - 当用户设备接入 LTE 网络时，MME 通过与 归属用户服务器（Home Subscriber Server, HSS） 的交互，完成用户身份的鉴权。HSS 中存储了用户的永久订阅信息。
+    - MME 使用 EPS-AKA（Evolved Packet System Authentication and Key Agreement） 协议进行鉴权，确保用户的合法性，并分配安全密钥用于后续的数据加密。
+4. 安全管理（Security Management）
+    - MME 负责生成并分发加密密钥和完整性保护密钥，以确保用户与网络之间的通信是安全的，防止窃听和篡改。
+    - 在用户接入时，MME 会与 eNodeB 协调，启用加密机制，确保在空中传输的数据被加密和保护。
+5. IP 地址分配
+    - 在用户连接到网络并建立会话时，MME 协调 P-GW 为用户分配 IP 地址。P-GW 负责实际的 IP 地址分配，但 MME 在会话建立和维护中起关键作用。
+6. 追踪区域管理（Tracking Area Management）
+    - MME 使用 追踪区（Tracking Area, TA） 来管理用户设备的位置信息。TA 是由多个 eNodeB（基站）组成的区域。当用户设备在空闲模式下移动到不同的 TA 时，需要向 MME 发起 TAU（Tracking Area Update） 请求，MME 更新用户的当前位置。
+    - 这确保了即使用户不处于活跃状态，网络仍能及时找到用户，保证来电和通知的送达。
+7. 网络间切换（Inter-RAT Handover）
+    - MME 还负责管理不同无线接入技术（RAT）之间的切换。例如，当用户从 LTE 网络切换到 UMTS（3G）或 GSM（2G）网络时，MME 与 SGSN（Serving GPRS Support Node） 协作，确保切换过程的平滑进行。
+8. 寻呼（Paging）
+    - 当用户设备处于空闲模式时，如果有下行流量（如来电、短信等），MME 会通过 寻呼消息（Paging Message） 通知用户设备，要求其重新激活并建立数据连接。
+    - MME 在 LTE 核心网（EPC）中的作用
+    - MME 是 LTE 核心网 EPC（Evolved Packet Core） 的控制平面节点，它与 EPC 的其他组件紧密协作，主要包括以下核心网元素：
+
+        - Serving Gateway（S-GW）：
+
+            S-GW 是用户数据的中转站，负责在用户设备和外部网络之间传输数据包。MME 负责协调 S-GW 来建立和管理用户的会话和承载。
+        - Packet Data Network Gateway（P-GW）：
+
+            P-GW 是用户设备通向外部数据网络（如互联网）的网关。它管理用户的 IP 地址分配，并负责流量的路由。MME 通过 S-GW 与 P-GW 交互，完成用户会话的建立。
+        - Home Subscriber Server（HSS）：
+
+            HSS 是一个数据库，存储了用户的订阅信息、鉴权数据和服务配置。MME 通过 HSS 获取用户的鉴权密钥、接入权限以及位置信息。
+        - eNodeB（基站）：
+
+            eNodeB 是 LTE 的无线接入节点。MME 与 eNodeB 协作，负责管理用户设备与无线接入网络之间的连接。当用户设备在空闲模式和活跃模式之间切换时，MME 也负责协调 eNodeB 处理切换请求。
+        - Serving GPRS Support Node（SGSN）：
+
+            在跨代网络（如从 LTE 切换到 3G 或 2G 网络）时，MME 需要与 SGSN 协作，确保网络间切换的顺利进行。
+### MME 的协议接口
+MME 在 LTE 网络中使用多个标准化的协议接口，与其他核心网元素和基站进行通信。主要的接口包括：
+
+1. S1-MME 接口：
+
+    这是 MME 与 eNodeB 之间的接口，主要用于传输控制平面信令。S1-MME 接口使用 S1AP（S1 Application Protocol） 协议，负责处理控制信令，包括移动性管理、用户接入控制等。
+2. S6a 接口：
+
+    这是 MME 与 HSS 之间的接口，使用 Diameter 协议 进行通信。S6a 接口主要用于用户鉴权、授权和位置更新等功能。
+3. S11 接口：
+
+    S11 是 MME 与 S-GW 之间的接口，负责处理会话管理和承载控制。MME 通过 S11 接口与 S-GW 协同，管理用户数据的路由和转发。
+4. S10 接口：
+
+    这是 MME 之间的接口，用于在用户设备从一个 MME 管辖的区域移动到另一个 MME 管辖区域时，进行状态和上下文的传递，支持无缝的移动性管理。
+5. SGs 接口：
+
+    MME 通过 SGs 接口与 2G/3G 的 MSC 进行通信，以支持语音回落（CSFB，Circuit Switched FallBack）功能。当 LTE 网络中没有语音承载时，用户可以通过 CSFB 切换到 2G/3G 网络进行语音通话。
+### MME 的重要性和作用
+MME 在 LTE 网络中是不可或缺的核心控制节点，它主要负责以下几方面的关键功能：
+
+1. 信令控制：
+
+    MME 处理所有与用户接入、移动性和会话管理相关的控制信令，但不直接处理用户的数据流量。它是网络的控制中枢，决定了用户设备如何与网络进行交互。
+2. 跨技术移动性：
+
+    MME 通过支持跨 RAT（Radio Access Technology）的移动性管理，确保 LTE 与其他无线接入技术（如 2G/3G）之间的无缝切换，保证了用户在不同网络之间的平滑过渡。
+3. 节能管理：
+
+    MME 通过对用户设备的状态管理，优化了设备的电池使用时间。它可以控制 UE 进入低功耗的空闲模式，减少信令负载，同时还能保证网络的服务质量。
+4. 网络负载管理：
+
+    MME 在处理接入控制、会话管理时，能够合理分配网络资源，并根据网络负载情况进行优化管理，确保高效利用无线资源和核心网资源。
+5. MME 在 5G 中的演进
+    在 5G 网络中，MME 的功能被分离和演进为不同的网络功能（NF，Network Function）：
+
+    - AMF（Access and Mobility Management Function）：AMF 是 5G 核心网中负责接入和移动性管理的网络功能，它继承并扩展了 MME 的大部分功能，主要负责接入控制、用户设备的鉴权和移动性管理。
+
+    5G 网络采用了服务化架构（Service-Based Architecture, SBA），MME 的功能被拆分并与其他网络功能协作，以提供更灵活和高效的移动通信服务。

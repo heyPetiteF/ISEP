@@ -332,7 +332,14 @@ $$
 - **波长**：频率越高，波长越短，功率衰减得越快，因此更高频率的信号在相同的距离上会损失更多的功率。
 - **距离衰减**：接收功率与发射和接收天线的距离平方成反比。也就是说，距离每增加一倍，接收功率会减少到原来的四分之一。
 
+## E.M Waves propagation
 
 
 
+# 12/11/2024 Vehicle Architecting for <ACEs>
+1. ACES
+    - Autonomous Vehicles
+    - Connected Vehicles
+    - Electrification 
+    - Shared mobility
 
