@@ -72,8 +72,10 @@ class SeparateGNNModel(nn.Module):
         self.mlp = nn.Sequential(
             nn.Linear(input_dim, hidden_dim),
             nn.ELU(),
+            nn.Dropout(0.2),  # Add Dropout
             nn.Linear(hidden_dim, hidden_dim),
-            nn.ELU()
+            nn.ELU(),
+            nn.Dropout(0.2)  # Add Dropout
         )
         self.gcn = GCNConv(hidden_dim, hidden_dim)
         self.fc = nn.Linear(hidden_dim, output_dim)
@@ -119,7 +121,6 @@ def train_model(model, train_data, target_indices, n_epochs, lr):
         progbar.update(epoch + 1, [("loss", loss.item())])
     return model
 
-
 def calculate_error(pred, y, floor_penalty=4):
     N = len(y)
     floor_error = np.sqrt(np.square(pred[:, 2] - y[:, 2])).sum()
@@ -137,13 +138,16 @@ def calculate_error(pred, y, floor_penalty=4):
     return average_error
 
 if __name__ == '__main__':
-    #FILE_PATH = 'C:/Users/16273/GitHub/ISEP-Documents/2409-2501/4.FinalProject/Data/TrainingData_b0.mat'
-    #KEY = 'trainingData_building0'
+    
+    # TrainingData
+    # FILE_PATH = 'C:/Users/16273/GitHub/ISEP-Documents/2409-2501/4.FinalProject/Data/TrainingData_b0_floor0.mat'
+    # KEY = 'trainingData_building0_floor0'
+    
+    # TestData
+    FILE_PATH = 'C:/Users/16273/GitHub/ISEP-Documents/2409-2501/4.FinalProject/Data/TestData_b0_floor1.mat'
+    KEY = 'validationData_building0_floor1'
 
-    FILE_PATH = 'C:/Users/16273/GitHub/ISEP-Documents/2409-2501/4.FinalProject/Data/TestData_b0.mat'
-    KEY = 'validationData_building0'
-
-    SAVE_PATH = 'C:/Users/16273/GitHub/ISEP-Documents/2409-2501/4.FinalProject/CodeetResultat/IMG'
+    #SAVE_PATH = 'C:/Users/16273/GitHub/ISEP-Documents/2409-2501/4.FinalProject/CodeetResultat/IMG'
 
     mat_data = sio.loadmat(FILE_PATH)
     data = mat_data[KEY]
@@ -151,12 +155,12 @@ if __name__ == '__main__':
     x = data[:, :519]
     y = data[:, 519:522]
     df_X = pd.DataFrame(x)
-    plot_histogram(df_X, SAVE_PATH)
 
     x_normalized = normalizeX(x)
     y_normalized_lon, y_normalized_lat = normalizeY(y[:, 0], y[:, 1])
     y_normalized = np.column_stack((y_normalized_lon, y_normalized_lat, y[:, 2]))
 
+    ################################        K
     edge_index = build_sparse_edge_index(x_normalized, k=5)
 
     train_data = Data(
@@ -165,18 +169,19 @@ if __name__ == '__main__':
         y=torch.tensor(y_normalized, dtype=torch.float)
     )
 
+    ######################################################### EPOCHS
     # Separate models for longitude, latitude, and floor
     print("\nTraining Longitude...")
     model_lon = SeparateGNNModel(input_dim=519, hidden_dim=256, output_dim=1)
-    model_lon = train_model(model_lon, train_data, target_indices=[0], n_epochs=3000, lr=0.001)
+    model_lon = train_model(model_lon, train_data, target_indices=[0], n_epochs=1000, lr=0.001)
 
     print("\nTraining Latitude...")
     model_lat = SeparateGNNModel(input_dim=519, hidden_dim=256, output_dim=1)
-    model_lat = train_model(model_lat, train_data, target_indices=[1], n_epochs=3000, lr=0.001)
+    model_lat = train_model(model_lat, train_data, target_indices=[1], n_epochs=1000, lr=0.001)
 
     print("\nTraining Floor...")
     model_floor = SeparateGNNModel(input_dim=519, hidden_dim=256, output_dim=1)
-    model_floor = train_model(model_floor, train_data, target_indices=[2], n_epochs=1000, lr=0.001)
+    model_floor = train_model(model_floor, train_data, target_indices=[2], n_epochs=500, lr=0.001)
 
     # Evaluate models
     with torch.no_grad():
@@ -196,4 +201,3 @@ if __name__ == '__main__':
         predictions[:, 2] = np.round(predictions[:, 2])  # Ensure floors are rounded
         average_error = calculate_error(predictions, y, floor_penalty=4)
         print("Finish")
-
